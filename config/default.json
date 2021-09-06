@@ -1,3 +1,4 @@
 {
-    "name": "ToDoList App"
+    "name": "ToDoList App",
+    "db_connectionString": "mongodb://localhost:27017/school"
 }
