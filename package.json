@@ -12,5 +12,18 @@
   },
   "author": "ali alaraby",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/alialaraby/todolist_backend#readme"
+  "homepage": "https://bitbucket.org/alialaraby/todolist_backend#readme",
+  "dependencies": {
+    "config": "^3.3.6",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "mongoose": "^6.0.4",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "debug": "^4.3.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12"
+  }
 }
