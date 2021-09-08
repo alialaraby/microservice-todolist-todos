@@ -1,4 +1,3 @@
-const UserModel = require('../models/user');
 const userService = require('../services/user.js');
 
 exports.insertUser = (req, res) => {
@@ -6,25 +5,21 @@ exports.insertUser = (req, res) => {
     .then(user => {
         res.status(200).json({ data: user, message: 'Inserted' });
     })
-    .catch(error => {
-        res.status(500).json({ error: error });
-    });
+    .catch(error => { res.status(500).json({error: error, message: 'something went wrong'}); }); // pass pipeline to internal server error middleware
 }
 
-exports.getAllUsers = (req, res) => {
+exports.getAllUsers = (req, res, next) => {
     userService.getAllUsers()
-    .then(users => {
+    .then(users => {x
         if(users.length)
             res.status(200).json({data: users, message: 'users fetched'});
         else
             res.status(204).json({data: users, message: 'empty content'});
     })
-    .catch(error => {
-        res.status(500).json({error: error})
-    });
+    .catch(error => { next(error) }); // pass pipeline to internal server error middleware
 }
 
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
     userService.login(req.body)
     .then(result => {
         // this is a way to get the falsy/truthy value with (!!) and the extra (!) is to check if it`s true or not
@@ -36,7 +31,5 @@ exports.login = (req, res) => {
             res.status(200).json({ data: result, message: 'logged in successfully' })
         }
     })
-    .catch(error => {
-        res.status(500).json({error: error})
-    })
+    .catch(error => { res.status(500).json({error: error, message: 'something went wrong'}); }); // pass pipeline to internal server error middleware
 }

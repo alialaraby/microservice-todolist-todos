@@ -2,14 +2,15 @@ const UserModel = require('../models/user');
 const bcrypt = require('bcrypt');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+
 exports.insertUser = async (userData) => {
-    let hash;
     try {
-        hash = await bcrypt.hash(userData.password, 1);
-    } catch (error) {
-        return error;
-    }
-    try {
+        let hash;
+        try {
+            hash = await bcrypt.hash(userData.password, 1);
+        } catch (error) {
+            throw new Error('hashing failed');
+        }
         return await UserModel.create({
             fullName: userData.fullName,
             username: userData.username,
@@ -30,16 +31,15 @@ exports.getAllUsers = async () => {
 }
 
 exports.login = async (userCreds) => {
-    //first check if email exists in the db
     let user;
     try {
         user = await UserModel.findOne({ email: userCreds.email }); 
-        if(!user) throw 'user not found';
+        if(!user) throw new Error('user not found');
         
         let correctPassword;
         try {
             correctPassword = await bcrypt.compare(userCreds.password, user.password);
-            if(!correctPassword) throw 'incorrect password';
+            if(!correctPassword) throw new Error('incorrect password');
         } catch (error) {
             throw error;
         }
