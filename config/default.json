@@ -1,4 +1,5 @@
 {
     "name": "ToDoList App",
-    "db_connectionString": "mongodb://localhost:27017/todolist"
+    "db_connectionString": "mongodb://localhost:27017/todolist",
+    "token_key": "SdasdsdfasdasddvVAGVadfawrga*/*466112365121e121$#$%#$%#$dacsvfalckcld"
 }

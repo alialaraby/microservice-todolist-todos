@@ -1,6 +1,7 @@
 const UserModel = require('../models/user');
 const bcrypt = require('bcrypt');
-
+const config = require('config');
+const jwt = require('jsonwebtoken');
 exports.insertUser = async (userData) => {
     let hash;
     try {
@@ -33,18 +34,17 @@ exports.login = async (userCreds) => {
     let user;
     try {
         user = await UserModel.findOne({ email: userCreds.email }); 
-        if(!user)
-            return null;
+        if(!user) throw 'user not found';
         
         let correctPassword;
         try {
             correctPassword = await bcrypt.compare(userCreds.password, user.password);
-            if(!correctPassword)
-                return 0;
+            if(!correctPassword) throw 'incorrect password';
         } catch (error) {
             throw error;
         }
-        return { email: user.email, username: user.username, fullName: user.fullName };
+        const token = jwt.sign({ userId: user._id }, config.get('token_key'), { expiresIn: '2h' });
+        return { _id: user._id, email: user.email, username: user.username, fullName: user.fullName, token: token };
     } catch (error) {
         return error;
     }
