@@ -43,7 +43,7 @@ exports.login = async (userCreds) => {
         } catch (error) {
             throw error;
         }
-        const token = jwt.sign({ userId: user._id }, config.get('token_key'), { expiresIn: '2h' });
+        const token = jwt.sign({ userId: user._id }, config.get('auth_key'), { expiresIn: '2h' });
         return { _id: user._id, email: user.email, username: user.username, fullName: user.fullName, token: token };
     } catch (error) {
         return error;

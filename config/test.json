@@ -1,5 +1,5 @@
 {
     "name": "ToDoList App - testing",
     "db_connectionString": "mongodb://localhost:27017/testDB",
-    "token_key": "SdasdsdfasdasddvVAGVadfawrga*/*466112365121e121$#$%#$%#$dacsvfalckcld"
+    "auth_key": ""
 }

@@ -1,8 +1,13 @@
 const morgan = require('morgan');
 const helmet = require('helmet');
 const express = require('express');
+const config = require('config');
 
 module.exports = (app, debug) => {
+    if(!config.get('auth_key')){
+        debug('jwt auth secret is not set');
+        process.exit(1);
+    }
     //app initial configs
     debug('initializing app configs ...');
     app.use(express.json()); // to read request body as json object
