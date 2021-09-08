@@ -10,7 +10,7 @@ exports.insertUser = (req, res) => {
 
 exports.getAllUsers = (req, res, next) => {
     userService.getAllUsers()
-    .then(users => {x
+    .then(users => {
         if(users.length)
             res.status(200).json({data: users, message: 'users fetched'});
         else
