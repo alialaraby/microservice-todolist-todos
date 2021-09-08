@@ -16,5 +16,6 @@ userRouter.use((req, res, next) => {
 })
 
 userRouter.post('/insertUser', userController.insertUser);
+userRouter.post('/login', userController.login);
 userRouter.get('/getAllUsers', userController.getAllUsers);
 module.exports = userRouter;

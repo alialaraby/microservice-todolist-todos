@@ -23,3 +23,20 @@ exports.getAllUsers = (req, res) => {
         res.status(500).json({error: error})
     });
 }
+
+exports.login = (req, res) => {
+    userService.login(req.body)
+    .then(result => {
+        // this is a way to get the falsy/truthy value with (!!) and the extra (!) is to check if it`s true or not
+        //if result is truthy (value, object, ...) with the ! it`s false as it`s defined already
+        //if result is falsy (0, null, ....) with the ! it`s true
+        if (!!!result) { 
+            res.status(404).json({ message: 'email or password is incorrect!' })
+        } else {
+            res.status(200).json({ data: result, message: 'logged in successfully' })
+        }
+    })
+    .catch(error => {
+        res.status(500).json({error: error})
+    })
+}
