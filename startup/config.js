@@ -2,6 +2,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const express = require('express');
 const config = require('config');
+const compression = require('compression');
 
 module.exports = (app, debug) => {
     if(!config.get('auth_key')){
@@ -12,6 +13,7 @@ module.exports = (app, debug) => {
     debug('initializing app configs ...');
     app.use(express.json()); // to read request body as json object
     app.use(helmet()); // to provide more security of requests headers
+    app.use(compression()); // to compress responses going back to client
     if(app.get('env') === 'development'){
         app.use(morgan('short')); // to log the incomming requests
     }

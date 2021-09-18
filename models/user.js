@@ -29,6 +29,10 @@ const UserModel = new mongoose.Schema({
             message: prop => prop.value + ' is week, use more complex password "exFR@#5648**Vv"'
         }
     },
+    accountConfirmed: {
+        type: Boolean,
+        default: false
+    }
 }, {
     timestamps: true
 });
