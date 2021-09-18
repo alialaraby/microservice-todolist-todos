@@ -1,5 +1,6 @@
 const error = require('../middlewares/error');
 const userRouter = require('../routers/user');
+const config = require('config');
 
 module.exports = (app, debug) => {
     debug('setting home end point ...');
