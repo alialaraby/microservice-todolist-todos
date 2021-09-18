@@ -1,0 +1,5 @@
+{
+    "name": "ToDoList App - development",
+    "db_connectionString": "mongodb://localhost:27017/todolist",
+    "auth_key": ""
+}
