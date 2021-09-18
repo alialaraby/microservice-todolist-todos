@@ -1,6 +1,6 @@
 const userService = require('../services/user.js');
 
-exports.insertUser = (req, res) => {
+exports.registerUser = (req, res) => {
     userService.insertUser(req.body)
     .then(user => {
         res.status(200).json({ data: user, message: 'Inserted' });

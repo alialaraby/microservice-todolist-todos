@@ -12,13 +12,8 @@ const userRouter = express.Router();
 const auth = require('../middlewares/auth');
 const error = require('../middlewares/error');
 
-userRouter.use((req, res, next) => {
-    console.log('req date: ', Date.now());
-    next();
-})
-
-userRouter.post('/insertUser', auth.authUser, userController.insertUser);
+userRouter.post('/registerUser', userController.registerUser);
 userRouter.post('/login', userController.login);
 userRouter.get('/getAllUsers', auth.authUser, userController.getAllUsers);
-// userRouter.use(error);
+userRouter.use(error);
 module.exports = userRouter;
