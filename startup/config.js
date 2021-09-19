@@ -18,5 +18,5 @@ module.exports = (app, debug) => {
         app.use(morgan('short')); // to log the incomming requests
     }
     app.set('view engine', 'pug');
-    app.set('views', '../views');
+    app.set('views', './views');
 }
