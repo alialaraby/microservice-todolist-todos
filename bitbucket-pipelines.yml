@@ -7,6 +7,12 @@ image: node:14.17.4
 pipelines:
   default:
     - step:
-        script:
-          - npm install
+       name: Deploy to production
+       deployment: production
+       script:
+         - pipe: atlassian/ssh-run:0.2.2
+           variables:
+             SSH_USER: $SSH_USER
+             SERVER: $SERVER
+             COMMAND: 'cd ~ && sudo git pull origin master && sudo npm i && sudo pm2 restart 0'
     
