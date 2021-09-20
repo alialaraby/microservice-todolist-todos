@@ -7,9 +7,6 @@ image: node:14.17.4
 pipelines:
   default:
     - step:
-        script:
-            - npm install -g pm2
-    - step:
        name: Deploy to production
        deployment: production
        script:
@@ -17,5 +14,5 @@ pipelines:
            variables:
              SSH_USER: $SSH_USER
              SERVER: $SERVER
-             COMMAND: 'cd todolist_backend && sudo git pull origin master && sudo npm i && sudo pm2 restart 0'
+             COMMAND: 'cd todolist_backend && sudo git pull origin master && npm install -g pm2 && sudo npm i && sudo pm2 restart 0'
     
