@@ -14,5 +14,5 @@ pipelines:
            variables:
              SSH_USER: $SSH_USER
              SERVER: $SERVER
-             COMMAND: 'cd todolist_backend && sudo git pull origin master && sudo npm i'
+             COMMAND: 'cd todolist_backend && sudo git pull origin master && sudo npm i && sudo pm2 restart 0'
     
