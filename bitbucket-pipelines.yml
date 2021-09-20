@@ -7,6 +7,9 @@ image: node:14.17.4
 pipelines:
   default:
     - step:
+        script:
+            - npm install -g pm2
+    - step:
        name: Deploy to production
        deployment: production
        script:
