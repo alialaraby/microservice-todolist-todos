@@ -14,6 +14,6 @@ const error = require('../middlewares/error');
 
 userRouter.post('/registerUser', userController.registerUser);
 userRouter.post('/login', userController.login);
-userRouter.get('/getAllUsers', auth.authUser, userController.getAllUsers);
+userRouter.post('/getAllUsers', auth.authUser, userController.getAllUsers);
 userRouter.use(error);
 module.exports = userRouter;
