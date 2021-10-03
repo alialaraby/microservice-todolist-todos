@@ -28,7 +28,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.4",
     "morgan": "^1.10.0",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "debug": "^4.3.2",

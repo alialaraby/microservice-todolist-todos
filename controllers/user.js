@@ -1,11 +1,12 @@
 const userService = require('../services/user.js');
+const { IncorrectCredentials, EmailNotConfirmed, BcryptHashingError } = require('../app-errors/custom-errors');
 
 exports.registerUser = (req, res) => {
     userService.insertUser(req.body)
     .then(user => {
         res.status(200).json({ data: user, message: 'Inserted' });
     })
-    .catch(error => { res.status(500).json({error: error, message: 'something went wrong'}); }); // pass pipeline to internal server error middleware
+    .catch(error => { next(error) }); // pass pipeline to internal server error middleware
 }
 
 exports.getAllUsers = (req, res, next) => {
@@ -22,14 +23,11 @@ exports.getAllUsers = (req, res, next) => {
 exports.login = (req, res, next) => {
     userService.login(req.body)
     .then(result => {
-        // this is a way to get the falsy/truthy value with (!!) and the extra (!) is to check if it`s true or not
-        //if result is truthy (value, object, ...) with the ! it`s false as it`s defined already
-        //if result is falsy (0, null, ....) with the ! it`s true
-        if (!!!result) { 
-            res.status(404).json({ message: 'email or password is incorrect!' })
-        } else {
-            res.status(200).json({ data: result, message: 'logged in successfully' })
+        if(result.result) res.status(200).json({ data: result.result, message: 'logged in successfully' });
+        else{
+            let statusCode = result.error instanceof IncorrectCredentials ? 400 : result.error instanceof EmailNotConfirmed ? 401 : 500;
+            res.status(statusCode).json({ message: result.error.message })
         }
     })
-    .catch(error => { res.status(500).json({error: error, message: 'something went wrong'}); }); // pass pipeline to internal server error middleware
+    .catch(error => { next(error) });
 }

@@ -51,3 +51,10 @@ Thumbs.db
 #env files
 .env
 .example.env
+
+#debugging configs
+/.vscode
+
+#winston error log
+errorsLog.log 
+exceptions.log
