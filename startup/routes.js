@@ -1,6 +1,7 @@
 const error = require('../middlewares/error');
 const config = require('config');
 const userRouter = require('../routers/user');
+const todoRouter = require('../routers/todo');
 const auth = require('../middlewares/auth');
 
 module.exports = (app, debug) => {
@@ -10,5 +11,6 @@ module.exports = (app, debug) => {
         res.render('index', { title: 'to do list', welcomeMessage: 'welcome to home page in: ', appName: config.get('name') })
     });
     app.use('/users', userRouter);
+    app.use('/todos', todoRouter);
     app.use(error);
 }
